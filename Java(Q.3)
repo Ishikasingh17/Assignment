@@ -1,0 +1,51 @@
+//Check if the input is pangram or not. (Pangram is a sentence that contains all the alphabet from a-z) 
+
+import java.util.Scanner;
+
+public class PangramChecker {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        System.out.print("Enter a sentence: ");
+        String input = scanner.nextLine();
+        
+        boolean isPangram = checkIfPangram(input);
+        
+        if (isPangram) {
+            System.out.println("The input is a pangram.");
+        } else {
+            System.out.println("The input is not a pangram.");
+        }
+        
+        scanner.close();
+    }
+    
+    private static boolean checkIfPangram(String input) {
+        // Create an array to mark the presence of each letter
+        boolean[] alphabet = new boolean[26];
+        int index = 0;
+        
+        // Convert the input to lower case to handle case insensitivity
+        input = input.toLowerCase();
+        
+        // Iterate through each character in the input string
+        for (int i = 0; i < input.length(); i++) {
+            char ch = input.charAt(i);
+            
+            // Check if the character is a letter
+            if (ch >= 'a' && ch <= 'z') {
+                index = ch - 'a';
+                alphabet[index] = true;
+            }
+        }
+        
+        // Check if all letters are present
+        for (int i = 0; i < 26; i++) {
+            if (!alphabet[i]) {
+                return false;
+            }
+        }
+        
+        return true;
+    }
+}
